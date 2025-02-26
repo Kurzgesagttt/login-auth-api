@@ -3,6 +3,7 @@ package com.example.login_auth_api.infra.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.login_auth_api.domain.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,16 @@ public class TokenService {
             throw new RuntimeException("Error while authenticating");
         }
 
+    }
+
+    public String validateToken(String token){
+        try{
+            Algorithm algorighm = Algorithm.HMAC256(secret);
+            return JWT.require(algorighm).withIssuer("login-auth-api")
+                    .build().verify(token).getSubject();
+        }catch(JWTVerificationException ex){
+            return null;
+        }
     }
 
     private Instant generateExpirationDate(){
