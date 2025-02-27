@@ -5,11 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user){
-
+    @GetMapping
+    public ResponseEntity<?> getUser(){
+        return ResponseEntity.ok("Sucesso!");
     }
 }
