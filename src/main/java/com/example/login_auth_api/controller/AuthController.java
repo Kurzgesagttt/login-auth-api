@@ -3,6 +3,7 @@ package com.example.login_auth_api.controller;
 import com.example.login_auth_api.domain.user.User;
 import com.example.login_auth_api.dto.LoginRequestDTO;
 import com.example.login_auth_api.dto.LoginResponseDTO;
+import com.example.login_auth_api.dto.RegisterRequestDTO;
 import com.example.login_auth_api.infra.security.TokenService;
 import com.example.login_auth_api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class AuthController {
         }
     }
     @PostMapping("/register")
-    public ResponseEntity<> register(@RequestBody LoginRequestDTO body){
+    public ResponseEntity<> register(@RequestBody RegisterRequestDTO body){
         User user = userRepository.findByEmail(body.email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         if(passwordEncoder.matches(body.password(), user.getPassword())){
