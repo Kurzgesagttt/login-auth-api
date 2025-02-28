@@ -4,6 +4,5 @@
    - JWT
    - Lombok
    - Banco De Dados em memória H2
-
-#Frontend utilizando tecnologia Angular
+# Frontend utilizando tecnologia Angular
   - Link: https://github.com/Kurzgesagttt/login-lucas
