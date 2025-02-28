@@ -7,6 +7,7 @@ import com.example.login_auth_api.dto.RegisterRequestDTO;
 import com.example.login_auth_api.infra.security.TokenService;
 import com.example.login_auth_api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +19,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 public class AuthController {
+    private UserRepository repository;
+    private PasswordEncoder passwordEncoder;
+    private TokenService tokenService;
 
-    private final UserRepository repository;
-    private final PasswordEncoder passwordEncoder;
-    private final TokenService tokenService;
-
+    public AuthController(UserRepository repository, PasswordEncoder passwordEncoder, TokenService tokenService) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body){
